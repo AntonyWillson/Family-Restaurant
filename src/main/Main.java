@@ -147,6 +147,7 @@ public class Main {
 			System.out.printf("|%-5s|%-10s|%-20s|%-10s|\n",(i+1),r.getKode(),r.getName(),r.getHarga());
 		}
 		System.out.println(" ");
+		System.out.println("Special Menu");
 		System.out.println("============================================================");
 		System.out.printf("|%-5s|%-10s|%-20s|%-10s|%-10s|\n","No.","Kode","Nama","Harga","Diskon");
 		System.out.println("============================================================");
@@ -157,40 +158,64 @@ public class Main {
 	}
 	
 	void menu4() {
-		String choose;
-		boolean found = false;
-		
-		while (found == false) {
-			do {
-				System.out.print("Masukan Kode : ");
-				choose = s.nextLine();
-			} while (choose.length() != 4);
-			
+		if (!RegularMenuList.isEmpty()) {
+			System.out.println("Reguler Menu");
+			System.out.println("==================================================");
+			System.out.printf("|%-5s|%-10s|%-20s|%-10s|\n","No.","Kode","Nama","Harga");
+			System.out.println("==================================================");
 			for (int i = 0; i < RegularMenuList.size(); i++) {
-				if (choose.equals(RegularMenuList.get(i).getKode())) {
-					RegularMenuList.remove(i);
-					found = true;
-				}
+				Menus r = RegularMenuList.get(i);
+				System.out.printf("|%-5s|%-10s|%-20s|%-10s|\n",(i+1),r.getKode(),r.getName(),r.getHarga());
 			}
-		}
-	}
-	
-	void menu5() {
 			String choose;
 			boolean found = false;
-			
 			while (found == false) {
 				do {
 					System.out.print("Masukan Kode : ");
 					choose = s.nextLine();
 				} while (choose.length() != 4);
-				
-				for (int i = 0; i < specialMenuList.size(); i++) {
-					if (choose.equals(specialMenuList.get(i).getKode())) {
-						specialMenuList.remove(i);
+
+				for (int i = 0; i < RegularMenuList.size(); i++) {
+					if (choose.equals(RegularMenuList.get(i).getKode())) {
+						RegularMenuList.remove(i);
 						found = true;
 					}
 				}
+			} 
+		}else {
+			System.out.println("NO Data");
+			System.out.println(" ");
+		}
+	}
+	
+	void menu5() {
+			if (!specialMenuList.isEmpty()) {
+				System.out.println("Special Menu");
+				System.out.println("============================================================");
+				System.out.printf("|%-5s|%-10s|%-20s|%-10s|%-10s|\n","No.","Kode","Nama","Harga","Diskon");
+				System.out.println("============================================================");
+				for (int i = 0; i < specialMenuList.size(); i++) {
+					Menus s = specialMenuList.get(i);
+					System.out.printf("|%-5s|%-10s|%-20s|%-10s|%-10s|\n",(i+1),s.getKode(),s.getName(),s.getHarga(),((Special)s).diskon);
+				}
+				String choose;
+				boolean found = false;
+				while (found == false) {
+					do {
+						System.out.print("Masukan Kode : ");
+						choose = s.nextLine();
+					} while (choose.length() != 4);
+
+					for (int i = 0; i < specialMenuList.size(); i++) {
+						if (choose.equals(specialMenuList.get(i).getKode())) {
+							specialMenuList.remove(i);
+							found = true;
+						}
+					}
+				} 
+			}else {
+				System.out.println("No Data !");
+				System.out.println(" ");
 			}
 		
 	}
